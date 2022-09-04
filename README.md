@@ -15,17 +15,19 @@
 
 ### Conectando à máquina virtual de cursos do Núcleo de Bioinformática e Biologia Computacional (NBBC) do Instituto Butantan
 
-Para esta prática acessaremos a máquina virtual via SSH (Secure Shell):
+Para esta prática acessaremos a máquina virtual via SSH (Secure Shell). É necessário trocar `usuario` pelo entregue pelo NCCB:
 
     ssh -p 2202 usuario@200.136.54.100
 
 ### Realizando análises de sequências utilizando o ViralFlow (via IGM_SARSCOV2)
 
-Checando se o igm_sarscov2 e os ambientes condas estão instalados:
-
-    conda env list
+Checando se o igm_sarscov2 está instalado:
 
     igm_sarscov2 -h
+
+Checando se os ambientes condas estão instalados:
+
+    conda env list
 
 Rodando a pipeline ViralFlow (via IGM_SARSCOV2)
 
