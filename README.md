@@ -1,7 +1,7 @@
 # 1º Curso de Bioinformatica do CeVIVAS
 ## Roteiro de prática: tratamento das reads, montagem por referência e chamada de SNPs
 
-### Copiando e colando dados de/para o terminal Linux:
+### Copiando e colando dados de/para o terminal Linux
 
 * Copiando informação do terminal:
   * Selecione com o mouse a informação a ser copiada
@@ -13,9 +13,20 @@
   * Clique no terminal
   * Utilize `Ctrl + Shift + V` para colar a informação no terminal
 
-### Conectando à máquina virtual de cursos do Núcleo de Bioinformática e Biologia Computacional (NBBC) do Instituto Butantan:
+### Conectando à máquina virtual de cursos do Núcleo de Bioinformática e Biologia Computacional (NBBC) do Instituto Butantan
 
 Para esta prática acessaremos a máquina virtual via SSH (Secure Shell):
 
     ssh -p 2202 usuario@200.136.54.100
 
+### Realizando análises de sequências utilizando o ViralFlow (via IGM_SARSCOV2)
+
+Checando se o igm_sarscov2 e os ambientes condas estão instalados:
+
+    conda env list
+
+    igm_sarscov2 -h
+
+Rodando a pipeline ViralFlow (via IGM_SARSCOV2)
+
+    igm_sarscov2 -w 1 -t 8 -p ARTIC_V3 -i cevivas/
