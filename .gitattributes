@@ -1,0 +1,2 @@
+SRR15365366_1.fastq.gz filter=lfs diff=lfs merge=lfs -text
+SRR15365366_2.fastq.gz filter=lfs diff=lfs merge=lfs -text
