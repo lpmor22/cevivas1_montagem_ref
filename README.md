@@ -29,6 +29,8 @@ Checando se os ambientes condas estão instalados:
 
     conda env list
 
-Rodando a pipeline ViralFlow (via IGM_SARSCOV2)
+Rodando a pipeline ViralFlow (via IGM_SARSCOV2):
 
     igm_sarscov2 -w 1 -t 8 -p ARTIC_V3 -i cevivas/
+
+## Como é dentro do pipeline a montagem?
