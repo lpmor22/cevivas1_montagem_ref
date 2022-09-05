@@ -1,0 +1,8 @@
+ERR9090113_1.fastq.gz filter=lfs diff=lfs merge=lfs -text
+ERR9090113_2.fastq.gz filter=lfs diff=lfs merge=lfs -text
+ERR9090116_1.fastq.gz filter=lfs diff=lfs merge=lfs -text
+ERR9090116_2.fastq.gz filter=lfs diff=lfs merge=lfs -text
+ERR9090117_1.fastq.gz filter=lfs diff=lfs merge=lfs -text
+ERR9090117_2.fastq.gz filter=lfs diff=lfs merge=lfs -text
+ERR9090119_1.fastq.gz filter=lfs diff=lfs merge=lfs -text
+ERR9090119_2.fastq.gz filter=lfs diff=lfs merge=lfs -text
