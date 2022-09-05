@@ -22,7 +22,8 @@ Para esta prática iremos acessar a máquina virtual via SSH (Secure Shell). É 
 
 ### Realizar análises de sequências utilizando o ViralFlow (via IGM_SARSCOV2)
 
-Vamos testar o pipeline com amostras do projeto `PRJEB37886` (https://www.ncbi.nlm.nih.gov/bioproject/PRJEB37886). Estas amostras foram sequenciadas utilizando Illumina NovaSeq 6000, paired-end, protocolo Illumina COVIDSeq com primers ARTIC versão 4.1.
+Vamos testar o pipeline com amostras do projeto `PRJEB37886` (https://www.ncbi.nlm.nih.gov/bioproject/PRJEB37886).
+Estas amostras foram sequenciadas utilizando Illumina NovaSeq 6000, paired-end, protocolo Illumina COVIDSeq com primers ARTIC versão 4.1.
 
 Checar se o igm_sarscov2 está instalado:
 
