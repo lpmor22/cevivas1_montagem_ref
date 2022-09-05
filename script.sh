@@ -68,19 +68,19 @@ paste <(samtools depth SRR15365366.sorted.bam | awk '{if ($3 > '"100"') {print $
 paste <(samtools depth SRR15365366.sorted.bam | awk '{if ($3 > '"1000"') {print $0}}' | wc -l) <(fastalength MN908947.3.fasta | awk '{print $1}') | awk -F"\t" '{printf("%0.2f\n", $1/$2*100)}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 # Obter a cobertura em porcentagem em relação ao genoma referência MN908947.3
-paste <(fastalength MN908947.3.fasta | awk '{print $1}') <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') | awk -F"\t" '{printf("%0.2f\n", ($1-$2)/$1*100)}') | tr '#' '\t' >> sumario_montagem.txt
+paste <(fastalength MN908947.3.fasta | awk '{print $1}') <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') | awk -F"\t" '{printf("%0.2f\n", ($1-$2)/$1*100)}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 # Obter o número absoluto de Ns na sequência consenso
-seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') | tr '#' '\t' >> sumario_montagem.txt
+seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 # Obter a porcentagem de Ns na sequência consenso
-paste <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') <(fastalength MN908947.3.fasta | awk '{print $1}')| awk -F"\t" '{printf("%0.2f\n", ($1/$2)*100)}') | tr '#' '\t' >> sumario_montagem.txt
+paste <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') <(fastalength MN908947.3.fasta | awk '{print $1}')| awk -F"\t" '{printf("%0.2f\n", ($1/$2)*100)}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 # Rodar classificação do pangolin
 pangolin SRR15365366.fa --outfile SRR15365366.pangolin.csv
 
 # Obter as versões do pangolin, do banco de dados utilizado e linhagem do SARS-CoV-2
-cat SRR15365366.pangolin.csv | sed -n 2p | awk -F, '{print $10"\t"$9"\t"$2}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
+cat SRR15365366.pangolin.csv | sed -n 2p | awk -F, '{print $10"\t"$9"\t"$2}' | awk '{printf $0"#"}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 # Criar dataset do nextclade para classificação
 nextclade dataset get --name 'sars-cov-2' --output-dir nextclade_sc2
@@ -89,7 +89,7 @@ nextclade dataset get --name 'sars-cov-2' --output-dir nextclade_sc2
 nextclade run --input-dataset nextclade_sc2 --output-tsv=SRR15365366.nextclade.tsv SRR15365366.fa
 
 # Obter a versão do nextclade
-nextclade --version | awk '{print $2}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
+nextclade --version | awk '{print $2}' | awk '{printf $0"#"}' | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 # Obter o clado do SARS-CoV-2
 cat SRR15365366.nextclade.tsv | sed -n 2p | awk -F"\t" '{print $2}' | awk '{printf $0}' >> sumario_montagem.txt
