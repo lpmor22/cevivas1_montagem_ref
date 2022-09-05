@@ -44,7 +44,7 @@ Estas amostras foram sequenciadas utilizando Illumina NovaSeq 6000, paired-end, 
 
 Rodar o pipeline ViralFlow (via IGM_SARSCOV2):
 
-    igm_sarscov2 -w 1 -t 8 -p ARTIC_V4-1 -i cevivas/
+    igm_sarscov2 -w 1 -t 8 -p ARTIC_V3 -i cevivas/
 
 ## Como é dentro do pipeline a montagem?
 
@@ -57,7 +57,7 @@ Ativar ambiente conda com as dependências necessárias para montagem:
 Filtrar as leituras com qualidade PHRED >=20 e manter leituras até o mínimo de 75 bp:
 
     fastp --cut_front --cut_tail --qualified_quality_phred 20 -l 75 -f 0 -t 0 -F 0 -T 0 \
-      -i SRR15365366_1.fastq.gz -I SRR15365366_2.fastq.gz --adapter_fasta ARTIC_V4-1.primers.fasta \
+      -i SRR15365366_1.fastq.gz -I SRR15365366_2.fastq.gz --adapter_fasta ARTIC_V3.primers.fasta \
       -o SRR15365366.trimado.R1.fastq.gz -O SRR15365366.trimado.R2.fastq.gz \
       -h SRR15365366.relatorio_fastp.html -j SRR15365366.relatorio_fastp.json
 
@@ -110,7 +110,7 @@ Criar arquivo de texto pra colocar as métricas de montagem:
 
 Adicionar ao arquivo do sumário o ID da amostra:
 
-    echo -n " SRR15365366""#" | tr '#' '\t' >> sumario_montagem.txt
+    echo -n "SRR15365366""#" | tr '#' '\t' >> sumario_montagem.txt
 
 Obter número total de leituras geradas:
 
@@ -138,15 +138,15 @@ Obter a porcentagem de profundidade 1000x em relação à referência `MN908947.
 
 Obter a cobertura em porcentagem em relação ao genoma referência `MN908947.3`:
 
-    paste <(fastalength MN908947.3.fasta | awk '{print $1}') <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') | awk -F"\t" '{printf("%0.2f\n", ($1-$2)/$1*100)}') | tr '#' '\t' >> sumario_montagem.txt
+    paste <(fastalength MN908947.3.fasta | awk '{print $1}') <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') | awk -F"\t" '{printf("%0.2f\n", ($1-$2)/$1*100)}') | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 Obter o número absoluto de Ns na sequência consenso:
 
-    seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') | tr '#' '\t' >> sumario_montagem.txt
+    seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 Obter a porcentagem de Ns na sequência consenso:
 
-    paste <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') <(fastalength MN908947.3.fasta | awk '{print $1}')| awk -F"\t" '{printf("%0.2f\n", ($1/$2)*100)}') | tr '#' '\t' >> sumario_montagem.txt
+    paste <(seqtk comp SRR15365366.fa | awk -F"\t" '{print $9}') <(fastalength MN908947.3.fasta | awk '{print $1}')| awk -F"\t" '{printf("%0.2f\n", ($1/$2)*100)}') | awk '{printf $0"#"}' | tr '#' '\t' >> sumario_montagem.txt
 
 Rodar classificação do pangolin:
 
