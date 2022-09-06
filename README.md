@@ -23,6 +23,8 @@ Para esta prática iremos acessar a máquina virtual via SSH (Secure Shell). É 
 Vamos testar o pipeline com amostras do projeto `PRJNA686074` (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA686074).
 Estas amostras foram sequenciadas utilizando Illumina NovaSeq 6000, paired-end, protocolo Illumina COVIDSeq com primers ARTIC versão 3.
 
+## Baixar amostras do projeto
+
     curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR153/066/SRR15365366/SRR15365366_1.fastq.gz -o SRR15365366_1.fastq.gz
     curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR153/066/SRR15365366/SRR15365366_2.fastq.gz -o SRR15365366_2.fastq.gz
     curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR154/086/SRR15428386/SRR15428386_1.fastq.gz -o SRR15428386_1.fastq.gz
@@ -34,7 +36,7 @@ Estas amostras foram sequenciadas utilizando Illumina NovaSeq 6000, paired-end, 
 
 ## Como é dentro do pipeline a montagem?
 
-Vamos testar com a amostra `SRR15365366` do mesmo projeto `PRJNA686074` (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA686074).
+Vamos testar com a amostra `SRR15365366`. Se quiser testar com outra amostra, troque `SRR15365366` pelo outro ID da amostra.
 
 Instalar conda:
 
