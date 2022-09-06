@@ -20,16 +20,6 @@ Para esta prática iremos acessar a máquina virtual via SSH (Secure Shell). É 
 
     ssh -p 2202 usuario@200.136.54.100
 
-### Realizar análises de sequências utilizando o ViralFlow (via IGM_SARSCOV2)
-
-Checar se o igm_sarscov2 está instalado:
-
-    igm_sarscov2 -h
-
-Checar se os ambientes condas estão instalados:
-
-    conda env list
-
 Vamos testar o pipeline com amostras do projeto `PRJNA686074` (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA686074).
 Estas amostras foram sequenciadas utilizando Illumina NovaSeq 6000, paired-end, protocolo Illumina COVIDSeq com primers ARTIC versão 3.
 
@@ -42,17 +32,27 @@ Estas amostras foram sequenciadas utilizando Illumina NovaSeq 6000, paired-end, 
     curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR154/046/SRR15428346/SRR15428346_1.fastq.gz -o SRR15428346_1.fastq.gz
     curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR154/046/SRR15428346/SRR15428346_2.fastq.gz -o SRR15428346_2.fastq.gz
 
-Rodar o pipeline ViralFlow (via IGM_SARSCOV2):
-
-    igm_sarscov2 -w 1 -t 8 -p ARTIC_V3 -i cevivas/
-
 ## Como é dentro do pipeline a montagem?
 
 Vamos testar com a amostra `SRR15365366` do mesmo projeto `PRJNA686074` (https://www.ncbi.nlm.nih.gov/bioproject/PRJNA686074).
 
+Instalar conda:
+
+    wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -bfp miniconda3
+    echo 'export PATH=$HOME/miniconda3/bin:/usr/local/share/rsi/idl/bin:$PATH' >> $HOME/.bashrc
+    source $HOME/.bashrc
+    conda install -y -c conda-forge mamba
+    mamba update -y -n base -c conda-forge -c anaconda -c bioconda -c defaults conda
+
+Criar ambientes conda para montagem e métricas da montagem:
+
+    mamba create -y -n montagem -c conda-forge -c anaconda -c bioconda -c defaults bwa fastp ivar mafft samtools seqkit
+    mamba create -y -n metricas -c conda-forge -c anaconda -c bioconda -c defaults exonerate ghostscript nextclade numpy pandas pangolin pysam samtools seaborn seqtk
+
 Ativar ambiente conda com as dependências necessárias para montagem:
 
-    source activate igm-sars2_assembly
+    source activate montagem
 
 Filtrar as leituras com qualidade PHRED >=20 e manter leituras até o mínimo de 75 bp:
 
@@ -102,7 +102,7 @@ Desativar o ambiente conda:
 
 Ativar ambiente conda com as dependências necessárias para obter métricas de montagem:
 
-    source activate igm-sars2_summary
+    source activate metricas
 
 Criar arquivo de texto pra colocar as métricas de montagem:
 
@@ -179,3 +179,7 @@ Obter o plot de cobertura e profundidade:
 Desativar o ambiente conda:
 
     conda deactivate
+
+### Para tirar dúvidas?
+
+Contato: laise.moraes@fiocruz.br
