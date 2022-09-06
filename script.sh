@@ -1,7 +1,19 @@
 #!/bin/bash
 
+# Instalar conda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -bfp miniconda3
+echo 'export PATH=$HOME/miniconda3/bin:/usr/local/share/rsi/idl/bin:$PATH' >> $HOME/.bashrc
+source $HOME/.bashrc
+conda install -y -c conda-forge mamba
+mamba update -y -n base -c conda-forge -c anaconda -c bioconda -c defaults conda
+
+# Criar ambientes conda para montagem e métricas da montagem
+mamba create -y -n montagem -c conda-forge -c anaconda -c bioconda -c defaults bwa fastp ivar mafft samtools seqkit
+mamba create -y -n sumario_montagem -c conda-forge -c anaconda -c bioconda -c defaults exonerate ghostscript nextclade numpy pandas pangolin pysam samtools seaborn seqtk
+
 # Ativar ambiente conda com as dependências necessárias para montagem
-source activate igm-sars2_assembly
+source activate montagem
 
 # Filtrar as leituras com qualidade PHRED >=20 e manter leituras até o mínimo de 75 bp
 fastp --cut_front --cut_tail --qualified_quality_phred 20 -l 75 -f 0 -t 0 -F 0 -T 0 \
@@ -41,7 +53,7 @@ mafft --quiet --auto --keeplength --inputorder --6merpair --leavegappyregion \
 conda deactivate
 
 # Ativar ambiente conda com as dependências necessárias para obter métricas de montagem
-source activate igm-sars2_summary
+source activate sumario_montagem
 
 # Criar arquivo de texto pra colocar as métricas de montagem
 echo "id_amostra#num_leituras_total#num_leituras_mapeadas#medias_profundidade#profundidade_10x#profundidade_100x#profundidade_1000x#cobertura_referencia#contagem_n#contagem_n_porcent#pango_versao#pango_database#pango_linhagem#nextclade_versao#nextclade_clado" | tr '#' '\t' > sumario_montagem.txt
