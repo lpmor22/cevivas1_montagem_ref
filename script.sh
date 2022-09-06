@@ -12,6 +12,10 @@ mamba update -y -n base -c conda-forge -c anaconda -c bioconda -c defaults conda
 mamba create -y -n montagem -c conda-forge -c anaconda -c bioconda -c defaults bwa fastp ivar mafft samtools seqkit
 mamba create -y -n sumario_montagem -c conda-forge -c anaconda -c bioconda -c defaults exonerate ghostscript nextclade numpy pandas pangolin pysam samtools seaborn seqtk
 
+# Baixar amostra SRR15365366
+curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR153/066/SRR15365366/SRR15365366_1.fastq.gz -o SRR15365366_1.fastq.gz
+curl -L ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR153/066/SRR15365366/SRR15365366_2.fastq.gz -o SRR15365366_2.fastq.gz
+
 # Ativar ambiente conda com as dependências necessárias para montagem
 source activate montagem
 
